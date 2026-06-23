@@ -79,9 +79,20 @@ def generate_recommendations(student: dict[str, Any], risk_category: str = "Medi
         summary = "The student is currently stable and should focus on consistency and advanced learning."
         mentor_note = "Encourage continued consistency and stretch learning through projects or peer mentoring."
 
+    normalized_top_problems = top_problems or ["No major academic risk signals detected."]
+    resources = [
+        "College LMS lecture notes and quizzes",
+        "Previous internal assessment papers",
+        "Faculty office hours or mentor sessions",
+        "Peer study group for difficult subjects",
+    ]
     return {
+        "student_id": student.get("student_id"),
+        "risk_category": risk_category,
         "summary": summary,
-        "top_3_problems": top_problems or ["No major academic risk signals detected."],
+        "top_problems": normalized_top_problems,
+        "top_3_problems": normalized_top_problems,
+        "action_plan": actions,
         "top_5_actions": actions,
         "seven_day_plan": [
             "Day 1: Review attendance, GPA, assignments, and weak subjects.",
@@ -96,11 +107,6 @@ def generate_recommendations(student: dict[str, Any], risk_category: str = "Medi
             "Week 3: Attempt practice tests and lab/problem-solving tasks.",
             "Week 4: Review progress with mentor and adjust the study plan.",
         ],
-        "resources": [
-            "College LMS lecture notes and quizzes",
-            "Previous internal assessment papers",
-            "Faculty office hours or mentor sessions",
-            "Peer study group for difficult subjects",
-        ],
+        "resources": resources,
         "mentor_note": mentor_note,
     }

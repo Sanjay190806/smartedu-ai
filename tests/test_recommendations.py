@@ -17,8 +17,12 @@ def test_high_risk_recommendations_include_intervention():
     plan = generate_recommendations(student, "High Risk")
 
     assert "Immediate academic support" in plan["summary"]
-    assert len(plan["top_5_actions"]) <= 5
-    assert any("mentor" in action.lower() for action in plan["top_5_actions"])
+    assert plan["risk_category"] == "High Risk"
+    assert len(plan["action_plan"]) <= 5
+    assert plan["top_problems"] == plan["top_3_problems"]
+    assert plan["action_plan"] == plan["top_5_actions"]
+    assert plan["resources"]
+    assert any("mentor" in action.lower() for action in plan["action_plan"])
 
 
 def test_top_problems_are_personalized():
