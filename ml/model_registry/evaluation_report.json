@@ -1,0 +1,119 @@
+{
+  "classification_report": {
+    "High Risk": {
+      "precision": 0.8823529411764706,
+      "recall": 0.8823529411764706,
+      "f1-score": 0.8823529411764706,
+      "support": 17.0
+    },
+    "Low Risk": {
+      "precision": 1.0,
+      "recall": 0.896551724137931,
+      "f1-score": 0.9454545454545454,
+      "support": 29.0
+    },
+    "Medium Risk": {
+      "precision": 0.7058823529411765,
+      "recall": 0.8571428571428571,
+      "f1-score": 0.7741935483870968,
+      "support": 14.0
+    },
+    "accuracy": 0.8833333333333333,
+    "macro avg": {
+      "precision": 0.8627450980392157,
+      "recall": 0.8786825074857529,
+      "f1-score": 0.8673336783393708,
+      "support": 60.0
+    },
+    "weighted avg": {
+      "precision": 0.8980392156862745,
+      "recall": 0.8833333333333333,
+      "f1-score": 0.8876148582600195,
+      "support": 60.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      26,
+      3,
+      0
+    ],
+    [
+      0,
+      12,
+      2
+    ],
+    [
+      0,
+      2,
+      15
+    ]
+  ],
+  "label_order": [
+    "Low Risk",
+    "Medium Risk",
+    "High Risk"
+  ],
+  "feature_importance_top_15": [
+    {
+      "feature": "numeric__internal_marks_average",
+      "importance": 0.3363115755113677
+    },
+    {
+      "feature": "numeric__current_gpa",
+      "importance": 0.13467532553914052
+    },
+    {
+      "feature": "numeric__attendance_percentage",
+      "importance": 0.12126381897031942
+    },
+    {
+      "feature": "numeric__assignment_completion_rate",
+      "importance": 0.09567796626176359
+    },
+    {
+      "feature": "numeric__subject_electronics_score",
+      "importance": 0.05631773879675676
+    },
+    {
+      "feature": "numeric__backlogs",
+      "importance": 0.054582126765983965
+    },
+    {
+      "feature": "numeric__stress_level",
+      "importance": 0.02953767023425259
+    },
+    {
+      "feature": "numeric__subject_programming_score",
+      "importance": 0.021108667940696886
+    },
+    {
+      "feature": "numeric__sleep_hours",
+      "importance": 0.01926983455113423
+    },
+    {
+      "feature": "numeric__study_hours_per_week",
+      "importance": 0.019060461406900993
+    },
+    {
+      "feature": "numeric__participation_score",
+      "importance": 0.018294020936642112
+    },
+    {
+      "feature": "numeric__quiz_average",
+      "importance": 0.01636832777273964
+    },
+    {
+      "feature": "numeric__extracurricular_hours",
+      "importance": 0.016012219589204492
+    },
+    {
+      "feature": "numeric__previous_semester_gpa",
+      "importance": 0.014587102481774855
+    },
+    {
+      "feature": "numeric__library_usage_hours",
+      "importance": 0.012146725829727603
+    }
+  ]
+}
