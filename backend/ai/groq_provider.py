@@ -10,6 +10,9 @@ from backend.ai.response_parser import parse_json_response
 from backend.config import settings
 
 
+GROQ_CHAT_COMPLETIONS_URL = "https://api.groq.com/openai/v1/chat/completions"
+
+
 class GroqProvider(BaseAIProvider):
     name = "groq"
     model_name = settings.GROQ_MODEL
@@ -19,7 +22,7 @@ class GroqProvider(BaseAIProvider):
             raise RuntimeError("Groq API key is not configured.")
         try:
             response = requests.post(
-                "https://api.groq.com/openai/v1/chat/completions",
+                GROQ_CHAT_COMPLETIONS_URL,
                 headers={"Authorization": f"Bearer {settings.GROQ_API_KEY}", "Content-Type": "application/json"},
                 json={
                     "model": settings.GROQ_MODEL,
@@ -32,7 +35,7 @@ class GroqProvider(BaseAIProvider):
             response.raise_for_status()
             text = response.json()["choices"][0]["message"]["content"]
             return parse_json_response(text)
-        except (requests.RequestException, KeyError, IndexError, ValueError) as exc:
+        except (requests.RequestException, KeyError, IndexError, TypeError, AttributeError, ValueError) as exc:
             raise RuntimeError(f"Groq request failed: {exc}") from exc
 
     def generate_next_question(self, context: dict[str, Any]) -> dict[str, Any]:

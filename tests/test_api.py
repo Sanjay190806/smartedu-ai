@@ -9,6 +9,7 @@ from sqlalchemy.orm import sessionmaker
 test_db = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
 test_db.close()
 os.environ["DATABASE_URL"] = f"sqlite:///{test_db.name}"
+os.environ["AI_PROVIDER"] = "offline"
 
 from backend.database import Base, get_db  # noqa: E402
 from backend.main import app

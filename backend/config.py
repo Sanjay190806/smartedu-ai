@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from backend.utils.paths import resolve_from_root
 
 
-load_dotenv()
+load_dotenv(resolve_from_root(".env"))
 
 
 @dataclass(frozen=True)
@@ -21,7 +21,7 @@ class Settings:
     FEATURE_NAMES_PATH: str = os.getenv("FEATURE_NAMES_PATH", "ml/model_registry/feature_names.json")
     METRICS_PATH: str = os.getenv("METRICS_PATH", "ml/model_registry/metrics.json")
     SAMPLE_DATA_PATH: str = os.getenv("SAMPLE_DATA_PATH", "data/sample_students.csv")
-    AI_PROVIDER: str = os.getenv("AI_PROVIDER", "offline").lower()
+    AI_PROVIDER: str = os.getenv("AI_PROVIDER", "groq").lower()
     OPENROUTER_API_KEY: str = os.getenv("OPENROUTER_API_KEY", "")
     OPENROUTER_MODEL: str = os.getenv("OPENROUTER_MODEL", "openai/gpt-4o-mini")
     GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")

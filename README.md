@@ -129,22 +129,38 @@ npm run build
 
 ## Environment Variables
 
-Create a backend `.env` from `.env.example` when needed.
+Create a backend `.env` from `.env.example` when needed. The `.env` file is ignored by Git and must never be committed.
+
+PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Bash:
+
+```bash
+cp .env.example .env
+```
+
+Safe backend `.env` example:
 
 ```text
 DATABASE_URL=sqlite:///./smartedu.db
 MODEL_PATH=ml/model_registry/model.joblib
 PREPROCESSOR_PATH=ml/model_registry/preprocessor.joblib
 APP_ENV=development
-AI_PROVIDER=offline
+AI_PROVIDER=groq
 OPENROUTER_API_KEY=
 OPENROUTER_MODEL=openai/gpt-4o-mini
-GROQ_API_KEY=
+GROQ_API_KEY=PASTE_YOUR_GROQ_API_KEY_HERE
 GROQ_MODEL=llama-3.1-8b-instant
 AI_REQUEST_TIMEOUT=30
 AI_MAX_TOKENS=1800
 AI_TEMPERATURE=0.4
 ```
+
+Use a placeholder while documenting. Put the real Groq key only in your local `.env`.
 
 Create a frontend `frontend/.env` from `frontend/.env.example` when needed.
 
@@ -157,29 +173,46 @@ Never commit `.env` files or real API keys.
 
 ## AI Provider Configuration
 
-Default local mode:
+Default local provider:
 
 ```text
-AI_PROVIDER=offline
+AI_PROVIDER=groq
+GROQ_MODEL=llama-3.1-8b-instant
 ```
 
-OpenRouter:
+Recommended cheap Groq model: `llama-3.1-8b-instant`.
+
+Better quality Groq model option: `llama-3.3-70b-versatile`.
+
+Groq uses the OpenAI-compatible chat completions endpoint:
 
 ```text
-AI_PROVIDER=openrouter
-OPENROUTER_API_KEY=your_key
-OPENROUTER_MODEL=openai/gpt-4o-mini
+POST https://api.groq.com/openai/v1/chat/completions
 ```
 
 Groq:
 
 ```text
 AI_PROVIDER=groq
-GROQ_API_KEY=your_key
+GROQ_API_KEY=PASTE_YOUR_GROQ_API_KEY_HERE
 GROQ_MODEL=llama-3.1-8b-instant
 ```
 
-If a hosted provider is missing a key or fails, the backend falls back to the offline mentor engine. Provider status never exposes API keys.
+OpenRouter:
+
+```text
+AI_PROVIDER=openrouter
+OPENROUTER_API_KEY=PASTE_YOUR_OPENROUTER_API_KEY_HERE
+OPENROUTER_MODEL=openai/gpt-4o-mini
+```
+
+Offline-only mode:
+
+```text
+AI_PROVIDER=offline
+```
+
+If a hosted provider is missing a key, times out, returns malformed JSON, or the request fails, the backend falls back to the offline mentor engine. Provider status never exposes API keys. API keys are backend-only; the React frontend must never receive Groq or OpenRouter keys.
 
 ## Demo Flow
 
