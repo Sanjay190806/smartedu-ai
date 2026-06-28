@@ -1,0 +1,47 @@
+:root {
+  --background: 210 40% 98%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --muted: 210 40% 94%;
+  --muted-foreground: 215 16% 42%;
+  --border: 214 32% 86%;
+  --input: 214 32% 86%;
+  --ring: 199 89% 48%;
+  --primary: 199 89% 38%;
+  --primary-foreground: 0 0% 100%;
+  --success: 142 72% 29%;
+  --warning: 32 95% 37%;
+  --danger: 0 72% 42%;
+}
+
+.dark {
+  --background: 222 47% 6%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 10%;
+  --card-foreground: 210 40% 98%;
+  --muted: 217 33% 14%;
+  --muted-foreground: 215 20% 70%;
+  --border: 217 33% 20%;
+  --input: 217 33% 20%;
+  --ring: 189 94% 43%;
+  --primary: 189 94% 43%;
+  --primary-foreground: 222 47% 6%;
+  --success: 142 72% 48%;
+  --warning: 38 92% 50%;
+  --danger: 0 84% 60%;
+}
+
+.app-bg {
+  background:
+    radial-gradient(circle at top left, rgba(34, 211, 238, 0.14), transparent 28rem),
+    radial-gradient(circle at 85% 5%, rgba(168, 85, 247, 0.12), transparent 28rem),
+    hsl(var(--background));
+}
+
+.light .app-bg {
+  background:
+    radial-gradient(circle at top left, rgba(14, 116, 144, 0.10), transparent 28rem),
+    radial-gradient(circle at 85% 5%, rgba(124, 58, 237, 0.08), transparent 28rem),
+    hsl(var(--background));
+}

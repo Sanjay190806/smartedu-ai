@@ -103,3 +103,35 @@ def get_department_analytics(department: str) -> dict[str, Any]:
 
 def get_subject_performance() -> dict[str, Any]:
     return _request("GET", "/analytics/subject-performance")
+
+
+def get_mentor_provider_status() -> dict[str, Any]:
+    return _request("GET", "/mentor/provider-status")
+
+
+def list_mentor_sessions() -> dict[str, Any]:
+    return _request("GET", "/mentor/sessions")
+
+
+def start_mentor_session(payload: dict[str, Any]) -> dict[str, Any]:
+    return _request("POST", "/mentor/start", json=payload)
+
+
+def submit_mentor_answer(session_id: str, answer: str) -> dict[str, Any]:
+    return _request("POST", f"/mentor/{session_id}/answer", json={"answer": answer})
+
+
+def get_mentor_session(session_id: str) -> dict[str, Any]:
+    return _request("GET", f"/mentor/{session_id}")
+
+
+def generate_mentor_report(session_id: str) -> dict[str, Any]:
+    return _request("POST", f"/mentor/{session_id}/report")
+
+
+def get_mentor_report(session_id: str) -> dict[str, Any]:
+    return _request("GET", f"/mentor/{session_id}/report")
+
+
+def delete_mentor_session(session_id: str) -> dict[str, Any]:
+    return _request("DELETE", f"/mentor/{session_id}")

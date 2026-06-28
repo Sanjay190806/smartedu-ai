@@ -1,168 +1,76 @@
 # SmartEdu AI
 
-Explainable Student Performance Prediction and Personalized Academic Guidance Recommendation System.
+SmartEdu AI is an AI-powered academic intelligence and career mentoring platform for students.
 
-SmartEdu AI is an academic support project that predicts student risk levels, explains likely risk factors, and generates personalized study recommendations. Phase 1 focuses on a clean Python ML foundation: synthetic data generation, preprocessing, model training, evaluation, prediction, explainability fallback logic, and recommendation rules.
+It combines machine learning academic risk prediction, explainable recommendations, a FastAPI backend, an AI Mentor interview engine, a Streamlit backup dashboard, and a premium React + TypeScript frontend.
 
-> SmartEdu AI is an academic support tool. Predictions are probabilistic and should be used by mentors and educators as guidance, not as a final decision about a student.
+> SmartEdu AI is a guidance tool. Predictions are probabilistic and should not replace human mentors, teachers, academic counselors, or institutional decision-making.
 
-## Phase 1 Features
+## Features
 
-- Generates 300 realistic synthetic student records.
-- Creates logical risk labels: `Low Risk`, `Medium Risk`, `High Risk`.
-- Trains Logistic Regression, Random Forest, and Gradient Boosting models.
-- Selects the best model using macro F1-score and High Risk recall.
-- Saves trained artifacts in `ml/model_registry/`.
-- Supports single-student prediction with confidence, top factors, explanation, and recommendations.
-- Includes SHAP-aware explainability with a robust fallback when SHAP is unavailable.
-- Includes pytest coverage for preprocessing, prediction, and recommendations.
+- ML academic risk prediction.
+- Explainable risk factors.
+- FastAPI backend.
+- SQLite local persistence.
+- Student CRUD.
+- Batch CSV prediction.
+- Analytics endpoints and dashboard views.
+- Personalized recommendation engine.
+- AI Mentor adaptive interview.
+- Offline mentor fallback.
+- Optional OpenRouter/Groq provider support.
+- Streamlit backup dashboard under `dashboard/`.
+- React + TypeScript premium frontend under `frontend/`.
+- Demo auth and optional Google OAuth.
+- Light and dark theme.
+- Mentor report downloads as JSON, Markdown, and TXT.
+
+## Architecture
+
+```text
+React frontend -> FastAPI backend -> ML model + AI mentor engine -> SQLite database
+```
+
+The Streamlit dashboard remains available as a backup interface.
 
 ## Phase Status
 
 | Phase | Scope | Status |
 | --- | --- | --- |
-| Phase 1 | ML foundation, data generation, model training, explainability, recommendations | Complete |
-| Phase 2 | FastAPI backend, SQLite persistence, prediction API, analytics, API tests | Complete |
-| Phase 3 | Streamlit dashboard, CSV upload UI, analytics views, recommendations UI | Complete |
-| Phase 4 | GenAI mentor chatbot | Planned |
-| Phase 5 | Documentation and interview packaging | Planned |
-| Phase 6 | Deployment and MLOps | Planned |
+| Phase 1 | ML Foundation | Complete |
+| Phase 2 | FastAPI Backend | Complete |
+| Phase 3 | Streamlit Dashboard Backup | Complete |
+| Phase 4 | AI Mentor Intelligence Engine | Complete |
+| Phase 5 | React Frontend | Complete |
+| Phase 5.5 | Premium UI Polish | Planned |
+| Phase 6 | Deployment + Production Auth | Planned |
 
-## Phase 2 Backend Features
-
-- FastAPI app with health and root routes.
-- SQLite database tables created automatically on startup.
-- Student CRUD API with latest academic record support.
-- Single-student risk prediction API using saved Phase 1 model artifacts.
-- Batch CSV prediction API.
-- Recommendation generation and retrieval.
-- Analytics summary, risk distribution, department analytics, and subject performance routes.
-- API tests using FastAPI `TestClient`.
-
-## Phase 3 Dashboard Features
-
-- Premium dark Streamlit multi-page dashboard with a professional academic intelligence command-center layout.
-- Executive overview with backend health, student metrics, risk distribution, and weak subject insights.
-- Student explorer with filters, profile view, latest academic record, and quick prediction action.
-- Manual risk prediction form with Low, Medium, and High Risk demo samples.
-- Batch CSV upload page using the backend `/predict/batch` route.
-- Explainable AI page showing top risk factors and student-friendly explanation.
-- Recommendations page with action plans, 7-day plan, 30-day plan, resources, mentor note, and downloads.
-- System status page showing backend health, model metrics, and artifact availability.
-- Custom CSS theme with dark cards, risk badges, status badges, timeline panels, command cards, and polished empty states.
-
-Screenshot placeholders:
-
-- `docs/screenshots/executive_overview.png`
-- `docs/screenshots/risk_prediction.png`
-- `docs/screenshots/batch_upload.png`
-- `docs/screenshots/recommendations.png`
-
-## Project Structure
+## Folder Structure
 
 ```text
-SmartEdu Ai/
-├── README.md
-├── requirements.txt
-├── .env.example
-├── data/
-│   ├── generate_sample_data.py
-│   ├── sample_students.csv
-│   ├── raw/
-│   │   └── .gitkeep
-│   └── processed/
-│       └── .gitkeep
-├── ml/
-│   ├── __init__.py
-│   ├── preprocessing.py
-│   ├── train_model.py
-│   ├── evaluate_model.py
-│   ├── predict.py
-│   ├── recommendation_engine.py
-│   ├── explainability.py
-│   └── model_registry/
-│       ├── .gitkeep
-│       ├── model.joblib
-│       ├── preprocessor.joblib
-│       ├── metrics.json
-│       └── feature_names.json
-├── backend/
-│   ├── main.py
-│   ├── config.py
-│   ├── database.py
-│   ├── models/
-│   ├── schemas/
-│   ├── routes/
-│   ├── services/
-│   └── utils/
-├── dashboard/
-│   ├── app.py
-│   ├── api_client.py
-│   ├── config.py
-│   ├── state.py
-│   ├── components/
-│   ├── pages/
-│   └── utils/
-└── tests/
-    ├── test_preprocessing.py
-    ├── test_prediction.py
-    ├── test_recommendations.py
-    ├── test_api.py
-    └── test_dashboard_utils.py
+backend/     FastAPI app, database, routes, schemas, services, AI provider adapters
+dashboard/   Streamlit backup dashboard
+frontend/    React + TypeScript + Vite frontend
+ml/          ML preprocessing, training, evaluation, prediction, artifacts
+data/        Sample data generation and synthetic CSV
+tests/       Pytest coverage for ML/backend/dashboard helpers/mentor engine
+docs/        Project reports and supporting documentation
 ```
 
-## Setup
+## Backend Setup
 
 ```bash
-python -m venv .venv
-.venv\Scripts\activate
+conda activate data
 pip install -r requirements.txt
-```
-
-On macOS/Linux:
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-## Run Commands
-
-Generate the dataset:
-
-```bash
 python data/generate_sample_data.py
-```
-
-Train models and save the best artifacts:
-
-```bash
 python ml/train_model.py
-```
-
-Evaluate the saved model:
-
-```bash
-python ml/evaluate_model.py
-```
-
-Run tests:
-
-```bash
-pytest
-```
-
-Run the backend:
-
-```bash
 uvicorn backend.main:app --reload
 ```
 
-Run the dashboard in another terminal:
+Backend URL:
 
-```bash
-streamlit run dashboard/app.py
+```text
+http://127.0.0.1:8000
 ```
 
 API docs:
@@ -171,205 +79,162 @@ API docs:
 http://127.0.0.1:8000/docs
 ```
 
-Dashboard URL:
+## React Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+React frontend URL:
+
+```text
+http://127.0.0.1:5173
+```
+
+Build check:
+
+```bash
+cd frontend
+npm run build
+```
+
+## Streamlit Backup Dashboard
+
+```bash
+streamlit run dashboard/app.py
+```
+
+Streamlit URL:
 
 ```text
 http://localhost:8501
 ```
 
-Import check:
+## Tests
+
+Backend and Python tests:
 
 ```bash
-python -c "from backend.main import app; print(app.title)"
+python -m pytest
 ```
 
-Expected output:
-
-```text
-SmartEdu AI Backend
-```
-
-## API Routes
-
-| Method | Route | Purpose |
-| --- | --- | --- |
-| `GET` | `/` | Backend root message. |
-| `GET` | `/health` | Health check and model availability. |
-| `GET` | `/students` | List students. |
-| `GET` | `/students/{student_id}` | Get one student with latest academic record. |
-| `POST` | `/students` | Create student and academic record. |
-| `PUT` | `/students/{student_id}` | Update student profile and/or academic record. |
-| `DELETE` | `/students/{student_id}` | Delete student and related records. |
-| `POST` | `/predict` | Predict one student's academic risk. |
-| `POST` | `/predict/batch` | Upload CSV and predict in batch. |
-| `GET` | `/recommendations/{student_id}` | Get latest stored recommendation. |
-| `POST` | `/recommendations/generate` | Generate recommendation from one academic record. |
-| `GET` | `/analytics/summary` | Overall student and risk summary. |
-| `GET` | `/analytics/risk-distribution` | Risk counts from stored predictions. |
-| `GET` | `/analytics/department/{department}` | Department-level metrics. |
-| `GET` | `/analytics/subject-performance` | Average subject scores. |
-
-## Dashboard Pages
-
-| Page | Purpose |
-| --- | --- |
-| Executive Overview | Shows backend health, student counts, risk distribution, metrics, and workflow. |
-| Student Explorer | Search/filter students, inspect a profile layout, and run quick predictions. |
-| Risk Prediction | Flagship prediction form with demo profile cards and a polished result report. |
-| Batch Upload | Upload CSV, validate schema, run batch predictions, and download reports. |
-| Explainable AI | Show ranked risk factors, narrative explanation, and ethical note. |
-| Recommendations | Mentor-style action report with problems, checklist, roadmap, resources, and copy-ready summary. |
-| System Status | Engineering dashboard for API health, model metrics, artifact status, and commands. |
-
-## Demo Workflow
-
-1. Start backend: `uvicorn backend.main:app --reload`
-2. Start dashboard: `streamlit run dashboard/app.py`
-3. Open Executive Overview and confirm backend is online.
-4. Open Risk Prediction, load the High Risk sample, and click Predict.
-5. Open Recommendations and select the predicted student.
-6. Open Batch Upload and use `data/sample_students.csv`.
-7. Open System Status to show model metrics and artifacts.
-
-Manual screenshot checklist:
-
-- Executive Overview: KPI cards, risk distribution, weak subjects, recent students.
-- Risk Prediction: sample cards, grouped form, result panel, action plan.
-- Batch Upload: schema card, dataset profile cards, risk charts, report downloads.
-- Recommendations: mentor report layout and copy-ready summary.
-- System Status: backend health, route cards, artifacts, model metrics.
-
-## Example Predict Request
-
-```json
-{
-  "student_id": "STU001",
-  "name": "Test Student",
-  "department": "Computer Science",
-  "year": 3,
-  "semester": 5,
-  "gender": "Female",
-  "attendance_percentage": 62,
-  "internal_marks_average": 55,
-  "assignment_completion_rate": 58,
-  "quiz_average": 52,
-  "previous_semester_gpa": 6.1,
-  "current_gpa": 5.8,
-  "study_hours_per_week": 6,
-  "backlogs": 2,
-  "late_submissions": 5,
-  "participation_score": 45,
-  "subject_math_score": 55,
-  "subject_programming_score": 49,
-  "subject_electronics_score": 60,
-  "subject_communication_score": 66,
-  "subject_lab_score": 58,
-  "library_usage_hours": 2,
-  "lms_login_frequency": 4,
-  "parent_meeting_count": 1,
-  "mentor_meeting_count": 1,
-  "extracurricular_hours": 2,
-  "stress_level": 8,
-  "sleep_hours": 5.2,
-  "internet_access": "Yes"
-}
-```
-
-Example curl:
+Frontend production build:
 
 ```bash
-curl -X POST "http://127.0.0.1:8000/predict" \
-  -H "Content-Type: application/json" \
-  -d @example_student.json
+cd frontend
+npm run build
 ```
 
-## Database
+## Environment Variables
 
-Phase 2 uses SQLite by default through:
+Create a backend `.env` from `.env.example` when needed.
 
 ```text
-sqlite:///./smartedu.db
+DATABASE_URL=sqlite:///./smartedu.db
+MODEL_PATH=ml/model_registry/model.joblib
+PREPROCESSOR_PATH=ml/model_registry/preprocessor.joblib
+APP_ENV=development
+AI_PROVIDER=offline
+OPENROUTER_API_KEY=
+OPENROUTER_MODEL=openai/gpt-4o-mini
+GROQ_API_KEY=
+GROQ_MODEL=llama-3.1-8b-instant
+AI_REQUEST_TIMEOUT=30
+AI_MAX_TOKENS=1800
+AI_TEMPERATURE=0.4
 ```
 
-The backend creates tables automatically on startup. The database file is ignored by git because it is a local runtime artifact.
+Create a frontend `frontend/.env` from `frontend/.env.example` when needed.
 
-## Dataset Schema
+```text
+VITE_API_BASE_URL=http://127.0.0.1:8000
+VITE_GOOGLE_CLIENT_ID=
+```
 
-| Column | Meaning |
+Never commit `.env` files or real API keys.
+
+## AI Provider Configuration
+
+Default local mode:
+
+```text
+AI_PROVIDER=offline
+```
+
+OpenRouter:
+
+```text
+AI_PROVIDER=openrouter
+OPENROUTER_API_KEY=your_key
+OPENROUTER_MODEL=openai/gpt-4o-mini
+```
+
+Groq:
+
+```text
+AI_PROVIDER=groq
+GROQ_API_KEY=your_key
+GROQ_MODEL=llama-3.1-8b-instant
+```
+
+If a hosted provider is missing a key or fails, the backend falls back to the offline mentor engine. Provider status never exposes API keys.
+
+## Demo Flow
+
+1. Start the FastAPI backend.
+2. Start the React frontend.
+3. Continue as Demo Student.
+4. Open Overview.
+5. Run Risk Prediction.
+6. Start AI Mentor interview.
+7. Generate Mentor Report.
+8. Download report.
+9. Open Analytics/System pages.
+
+## React Frontend Routes
+
+| Route | Purpose |
 | --- | --- |
-| `student_id` | Unique student identifier. |
-| `name` | Synthetic student name. |
-| `department` | Academic department. |
-| `year` | Current year of study. |
-| `semester` | Current semester. |
-| `gender` | Synthetic gender category. |
-| `attendance_percentage` | Overall attendance percentage. |
-| `internal_marks_average` | Average internal assessment marks. |
-| `assignment_completion_rate` | Assignment completion percentage. |
-| `quiz_average` | Average quiz score. |
-| `previous_semester_gpa` | Previous semester GPA on a 10-point scale. |
-| `current_gpa` | Current GPA on a 10-point scale. |
-| `study_hours_per_week` | Weekly study hours outside class. |
-| `backlogs` | Number of unresolved backlogs. |
-| `late_submissions` | Count of late submissions. |
-| `participation_score` | Class participation score. |
-| `subject_math_score` | Mathematics score. |
-| `subject_programming_score` | Programming score. |
-| `subject_electronics_score` | Electronics score. |
-| `subject_communication_score` | Communication score. |
-| `subject_lab_score` | Lab performance score. |
-| `library_usage_hours` | Weekly library usage. |
-| `lms_login_frequency` | LMS logins per week. |
-| `parent_meeting_count` | Parent meetings in the term. |
-| `mentor_meeting_count` | Mentor meetings in the term. |
-| `extracurricular_hours` | Weekly extracurricular hours. |
-| `stress_level` | Self-reported stress level from 1 to 10. |
-| `sleep_hours` | Average sleep hours per night. |
-| `internet_access` | Whether reliable internet access is available. |
-| `risk_label` | Target label: Low Risk, Medium Risk, or High Risk. |
+| `/` | Premium landing page |
+| `/login` | Google OAuth or demo mode login |
+| `/about` | Project explanation |
+| `/privacy` | Privacy and AI disclaimer |
+| `/app/overview` | Main dashboard overview |
+| `/app/predict` | Risk prediction form and report |
+| `/app/students` | Student table and profile view |
+| `/app/batch` | CSV batch prediction workflow |
+| `/app/mentor` | Adaptive AI Mentor interview |
+| `/app/report/:sessionId` | Human-readable mentor report |
+| `/app/analytics` | Risk and subject analytics |
+| `/app/system` | Backend/provider/system status |
+| `/app/settings` | Theme, auth, API URL, and security notes |
 
-## ML Architecture
+## Safety And Ethics
 
-```mermaid
-flowchart LR
-    A["Synthetic academic CSV"] --> B["Validation and feature split"]
-    B --> C["ColumnTransformer preprocessing"]
-    C --> D["Train 3 classifiers"]
-    D --> E["Select by F1 + High Risk recall"]
-    E --> F["Persist model artifacts"]
-    F --> G["Prediction + explainability"]
-    G --> H["Recommendation engine"]
-```
-
-## Model Artifacts
-
-Training saves:
-
-- `ml/model_registry/model.joblib`
-- `ml/model_registry/preprocessor.joblib`
-- `ml/model_registry/metrics.json`
-- `ml/model_registry/feature_names.json`
-
-## Future Phases
-
-- Optional GenAI mentor chatbot.
-- Docker and GitHub Actions CI.
+SmartEdu AI should be used as a support tool. It can help mentors identify students who may need support, explain model signals, and generate guidance plans. It should not be used as a final judgment about a student's ability, future, mental health, or academic standing.
 
 ## Known Limitations
 
-- No login/auth yet.
-- SQLite is local-only.
-- The included dataset is synthetic.
-- Predictions are probabilistic and must not be used as final judgment about a student.
-- Dashboard depends on the FastAPI backend being running for live data and predictions.
-- GenAI mentor support is planned for a future phase.
+- Google auth is frontend-local demo auth, not production backend auth.
+- SQLite is local-first, not a production database.
+- Dataset is synthetic.
+- AI provider keys are optional and backend-only.
+- Streamlit remains backup.
+- Deployment is not done yet.
+- Premium UI polish is planned.
 
-## Resume Bullets
+## Git Hygiene
 
-- Built an explainable ML pipeline for early student academic risk detection using Scikit-learn, model comparison, and persisted inference artifacts.
-- Engineered realistic synthetic education data with rule-based target labeling to reflect attendance, GPA, assignments, backlogs, stress, and sleep patterns.
-- Implemented personalized academic recommendation logic with test coverage for preprocessing, inference, and guidance generation.
+Do not commit:
 
-## Interview Pitch
-
-SmartEdu AI is an academic support system that identifies students who may need help before problems become severe. In Phase 1, I built the ML foundation: a realistic synthetic dataset, preprocessing pipeline, three model candidates, model selection based on F1 and High Risk recall, explainability fallbacks, and personalized recommendations. The project is designed to grow into a full FastAPI and dashboard product while keeping the ML layer modular and testable.
+- `.env`
+- `frontend/.env`
+- `smartedu.db`
+- `*.db`
+- `frontend/node_modules/`
+- `frontend/dist/`
+- `__pycache__/`
+- `.pytest_cache/`
+- virtual environment folders

@@ -5,7 +5,7 @@ import streamlit as st
 from dashboard import api_client
 from dashboard.config import API_BASE_URL, APP_SUBTITLE, APP_TITLE, DISCLAIMER
 from dashboard.components.cards import render_command_card, status_badge
-from dashboard.components.theme import inject_premium_css
+from dashboard.components.theme import THEME_OPTIONS, get_active_theme, inject_premium_css, set_active_theme
 
 
 def render_page_header(title: str, subtitle: str | None = None) -> None:
@@ -23,6 +23,17 @@ def render_sidebar() -> dict:
     inject_premium_css()
     with st.sidebar:
         st.markdown("## SmartEdu AI")
+        active = str(st.session_state.get("smartedu_theme", "dark")).title()
+        selected = st.radio(
+            "Theme",
+            THEME_OPTIONS,
+            index=THEME_OPTIONS.index(active) if active in THEME_OPTIONS else 0,
+            horizontal=True,
+        )
+        set_active_theme(selected)
+        inject_premium_css()
+        st.caption(f"Active theme: {get_active_theme().title()}")
+        st.divider()
         health = api_client.check_backend_health()
         status_badge("Backend", bool(health.get("ok")))
         if health.get("ok"):

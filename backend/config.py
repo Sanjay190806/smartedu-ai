@@ -3,7 +3,12 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass
 
+from dotenv import load_dotenv
+
 from backend.utils.paths import resolve_from_root
+
+
+load_dotenv()
 
 
 @dataclass(frozen=True)
@@ -16,6 +21,14 @@ class Settings:
     FEATURE_NAMES_PATH: str = os.getenv("FEATURE_NAMES_PATH", "ml/model_registry/feature_names.json")
     METRICS_PATH: str = os.getenv("METRICS_PATH", "ml/model_registry/metrics.json")
     SAMPLE_DATA_PATH: str = os.getenv("SAMPLE_DATA_PATH", "data/sample_students.csv")
+    AI_PROVIDER: str = os.getenv("AI_PROVIDER", "offline").lower()
+    OPENROUTER_API_KEY: str = os.getenv("OPENROUTER_API_KEY", "")
+    OPENROUTER_MODEL: str = os.getenv("OPENROUTER_MODEL", "openai/gpt-4o-mini")
+    GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
+    GROQ_MODEL: str = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+    AI_REQUEST_TIMEOUT: int = int(os.getenv("AI_REQUEST_TIMEOUT", "30"))
+    AI_MAX_TOKENS: int = int(os.getenv("AI_MAX_TOKENS", "1800"))
+    AI_TEMPERATURE: float = float(os.getenv("AI_TEMPERATURE", "0.4"))
 
     @property
     def model_path(self):

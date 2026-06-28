@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.config import settings
 from backend.database import create_tables
-from backend.routes import analytics, health, predictions, recommendations, students
+from backend.routes import analytics, health, mentor, predictions, recommendations, students
 from backend.utils.logger import get_logger
 
 
@@ -28,6 +28,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
         "http://localhost:8501",
         "http://127.0.0.1:8501",
     ],
@@ -44,3 +46,4 @@ app.include_router(students.router)
 app.include_router(predictions.router)
 app.include_router(recommendations.router)
 app.include_router(analytics.router)
+app.include_router(mentor.router)

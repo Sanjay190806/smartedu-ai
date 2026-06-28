@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
-from dashboard.config import RISK_COLORS
+from dashboard.components.theme import get_risk_colors
 
 
 def safe_get(data: dict[str, Any] | None, key: str, default: Any = "-") -> Any:
@@ -47,4 +47,4 @@ def format_datetime(value: Any) -> str:
 
 
 def risk_label_to_color(risk: str) -> str:
-    return RISK_COLORS.get(risk, "#475569")
+    return get_risk_colors().get(risk, "#475569")

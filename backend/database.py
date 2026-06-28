@@ -27,7 +27,7 @@ def get_db() -> Generator[Session, None, None]:
 
 
 def create_tables() -> None:
-    from backend.models import academic_record, prediction, recommendation, student  # noqa: F401
+    from backend.models import academic_record, mentor_answer, mentor_report, mentor_session, prediction, recommendation, student  # noqa: F401
 
     Base.metadata.create_all(bind=engine)
     ensure_sqlite_schema()

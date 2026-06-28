@@ -18,7 +18,7 @@ def render_metric_card(
     accent: str | None = None,
     icon: str | None = None,
 ) -> None:
-    border_color = accent or "#60a5fa"
+    border_color = accent or "var(--accent)"
     st.markdown(
         f"""
         <div class="metric-card" style="--blue:{html.escape(border_color)}">
@@ -40,7 +40,7 @@ def render_status_card(title: str, status: bool | str, description: str | None =
         <div class="smart-card">
           <div class="small-label">{html.escape(title)}</div>
           <div style="margin-top:.65rem"><span class="status-badge {css_class}">{label}</span></div>
-          <p style="color:#aab8cb;margin-bottom:0">{html.escape(description or "")}</p>
+          <p style="color:var(--text-secondary);margin-bottom:0">{html.escape(description or "")}</p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -82,7 +82,7 @@ def render_info_card(title: str, body: str, icon: str | None = None) -> None:
         f"""
         <div class="smart-card">
           <div class="section-title" style="margin-top:0">{html.escape(icon + " " if icon else "")}{html.escape(title)}</div>
-          <p style="color:#cbd5e1;margin-bottom:0">{html.escape(body)}</p>
+          <p style="color:var(--text-secondary);margin-bottom:0">{html.escape(body)}</p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -94,7 +94,7 @@ def render_empty_state(title: str, message: str, action_text: str | None = None)
         f"""
         <div class="empty-state">
           <h3>{html.escape(title)}</h3>
-          <p style="color:#aab8cb">{html.escape(message)}</p>
+          <p style="color:var(--text-secondary)">{html.escape(message)}</p>
           <div class="small-label">{html.escape(action_text or "")}</div>
         </div>
         """,
