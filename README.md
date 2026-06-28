@@ -37,13 +37,13 @@ The Streamlit dashboard remains available as a backup interface.
 
 | Phase | Scope | Status |
 | --- | --- | --- |
-| Phase 1 | ML Foundation | Complete |
-| Phase 2 | FastAPI Backend | Complete |
-| Phase 3 | Streamlit Dashboard Backup | Complete |
-| Phase 4 | AI Mentor Intelligence Engine | Complete |
-| Phase 5 | React Frontend | Complete |
-| Phase 5.5 | Premium UI Polish | Planned |
-| Phase 6 | Deployment + Production Auth | Planned |
+| v1.0.0 Local Stable Release | ML Foundation + Backend + Core Dashboard + AI Mentor | Complete |
+| v1.1.0 Security + Config Hardening | Environment safety, provider fallback, secret hygiene | Complete |
+| v1.2.0 AI Mentor Quality Upgrade | Adaptive interview and report quality improvements | Complete |
+| v1.3.0 Reports + Analytics Upgrade | Deeper reporting and analytics enhancements | Planned |
+| v1.4.0 Frontend Performance + UX Polish | Faster UI and smoother interaction polish | Planned |
+| v1.5.0 Deployment Prep | Containerization and release readiness | Planned |
+| v2.0.0 Production Release | Production-grade architecture and deployment | Planned |
 
 ## Folder Structure
 
@@ -153,7 +153,7 @@ APP_ENV=development
 AI_PROVIDER=groq
 OPENROUTER_API_KEY=
 OPENROUTER_MODEL=openai/gpt-4o-mini
-GROQ_API_KEY=PASTE_YOUR_GROQ_API_KEY_HERE
+GROQ_API_KEY=
 GROQ_MODEL=llama-3.1-8b-instant
 AI_REQUEST_TIMEOUT=30
 AI_MAX_TOKENS=1800
@@ -194,7 +194,7 @@ Groq:
 
 ```text
 AI_PROVIDER=groq
-GROQ_API_KEY=PASTE_YOUR_GROQ_API_KEY_HERE
+GROQ_API_KEY=
 GROQ_MODEL=llama-3.1-8b-instant
 ```
 
@@ -202,7 +202,7 @@ OpenRouter:
 
 ```text
 AI_PROVIDER=openrouter
-OPENROUTER_API_KEY=PASTE_YOUR_OPENROUTER_API_KEY_HERE
+OPENROUTER_API_KEY=
 OPENROUTER_MODEL=openai/gpt-4o-mini
 ```
 

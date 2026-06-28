@@ -7,8 +7,16 @@ from backend.ai.openrouter_provider import OpenRouterProvider
 from backend.config import settings
 
 
-def get_provider() -> BaseAIProvider:
+VALID_PROVIDERS = {"groq", "openrouter", "offline"}
+
+
+def _normalized_provider() -> str:
     provider = settings.AI_PROVIDER.strip().lower()
+    return provider if provider in VALID_PROVIDERS else "offline"
+
+
+def get_provider() -> BaseAIProvider:
+    provider = _normalized_provider()
     if provider == "openrouter":
         return OpenRouterProvider()
     if provider == "groq":
@@ -17,7 +25,8 @@ def get_provider() -> BaseAIProvider:
 
 
 def provider_status() -> dict:
-    provider = settings.AI_PROVIDER.strip().lower()
+    raw_provider = settings.AI_PROVIDER.strip().lower()
+    provider = _normalized_provider()
     warning = None
     if provider == "openrouter":
         configured = bool(settings.OPENROUTER_API_KEY)
@@ -32,8 +41,8 @@ def provider_status() -> dict:
     else:
         configured = False
         active_model = "offline-rule-based"
-        if provider != "offline":
-            warning = f"Unknown AI provider '{provider}'. Using offline fallback."
+        if raw_provider != "offline":
+            warning = f"Unknown AI provider '{raw_provider}'. Using offline fallback."
     return {
         "provider": provider,
         "real_ai_configured": configured,

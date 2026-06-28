@@ -11,6 +11,9 @@ from backend.ai.response_parser import parse_json_response
 from backend.config import settings
 
 
+OPENROUTER_CHAT_COMPLETIONS_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+
 class OpenRouterProvider(BaseAIProvider):
     name = "openrouter"
     model_name = settings.OPENROUTER_MODEL
@@ -23,7 +26,7 @@ class OpenRouterProvider(BaseAIProvider):
             raise RuntimeError("OpenRouter API key is not configured.")
         try:
             response = requests.post(
-                "https://openrouter.ai/api/v1/chat/completions",
+                OPENROUTER_CHAT_COMPLETIONS_URL,
                 headers={"Authorization": f"Bearer {settings.OPENROUTER_API_KEY}", "Content-Type": "application/json"},
                 json={
                     "model": settings.OPENROUTER_MODEL,
@@ -34,9 +37,10 @@ class OpenRouterProvider(BaseAIProvider):
                 timeout=settings.AI_REQUEST_TIMEOUT,
             )
             response.raise_for_status()
-            text = response.json()["choices"][0]["message"]["content"]
+            payload = response.json()
+            text = payload["choices"][0]["message"]["content"]
             return parse_json_response(text)
-        except (requests.RequestException, KeyError, IndexError, ValueError) as exc:
+        except (requests.RequestException, KeyError, IndexError, ValueError, TypeError, AttributeError) as exc:
             raise RuntimeError(f"OpenRouter request failed: {exc}") from exc
 
     def generate_next_question(self, context: dict[str, Any]) -> dict[str, Any]:
