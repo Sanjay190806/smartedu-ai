@@ -41,7 +41,7 @@ SmartEdu AI is an academic support project that predicts student risk levels, ex
 
 ## Phase 3 Dashboard Features
 
-- Streamlit multi-page dashboard with a professional academic intelligence layout.
+- Premium dark Streamlit multi-page dashboard with a professional academic intelligence command-center layout.
 - Executive overview with backend health, student metrics, risk distribution, and weak subject insights.
 - Student explorer with filters, profile view, latest academic record, and quick prediction action.
 - Manual risk prediction form with Low, Medium, and High Risk demo samples.
@@ -49,6 +49,7 @@ SmartEdu AI is an academic support project that predicts student risk levels, ex
 - Explainable AI page showing top risk factors and student-friendly explanation.
 - Recommendations page with action plans, 7-day plan, 30-day plan, resources, mentor note, and downloads.
 - System status page showing backend health, model metrics, and artifact availability.
+- Custom CSS theme with dark cards, risk badges, status badges, timeline panels, command cards, and polished empty states.
 
 Screenshot placeholders:
 
@@ -213,12 +214,12 @@ SmartEdu AI Backend
 | Page | Purpose |
 | --- | --- |
 | Executive Overview | Shows backend health, student counts, risk distribution, metrics, and workflow. |
-| Student Explorer | Search/filter students and run quick predictions. |
-| Risk Prediction | Manual prediction form with demo samples. |
-| Batch Upload | Upload CSV, run batch predictions, and download reports. |
-| Explainable AI | Show top factors and student-friendly explanation. |
-| Recommendations | Display saved or generated academic guidance. |
-| System Status | Show API health, model metrics, and artifact status. |
+| Student Explorer | Search/filter students, inspect a profile layout, and run quick predictions. |
+| Risk Prediction | Flagship prediction form with demo profile cards and a polished result report. |
+| Batch Upload | Upload CSV, validate schema, run batch predictions, and download reports. |
+| Explainable AI | Show ranked risk factors, narrative explanation, and ethical note. |
+| Recommendations | Mentor-style action report with problems, checklist, roadmap, resources, and copy-ready summary. |
+| System Status | Engineering dashboard for API health, model metrics, artifact status, and commands. |
 
 ## Demo Workflow
 
@@ -229,6 +230,14 @@ SmartEdu AI Backend
 5. Open Recommendations and select the predicted student.
 6. Open Batch Upload and use `data/sample_students.csv`.
 7. Open System Status to show model metrics and artifacts.
+
+Manual screenshot checklist:
+
+- Executive Overview: KPI cards, risk distribution, weak subjects, recent students.
+- Risk Prediction: sample cards, grouped form, result panel, action plan.
+- Batch Upload: schema card, dataset profile cards, risk charts, report downloads.
+- Recommendations: mentor report layout and copy-ready summary.
+- System Status: backend health, route cards, artifacts, model metrics.
 
 ## Example Predict Request
 

@@ -7,18 +7,36 @@ from dashboard.utils.sample_payloads import HIGH_RISK_SAMPLE, LOW_RISK_SAMPLE, M
 
 def sample_payload_buttons() -> None:
     col1, col2, col3 = st.columns(3)
-    if col1.button("Load High Risk Sample", use_container_width=True):
-        st.session_state.active_sample_payload = HIGH_RISK_SAMPLE.copy()
-    if col2.button("Load Medium Risk Sample", use_container_width=True):
-        st.session_state.active_sample_payload = MEDIUM_RISK_SAMPLE.copy()
-    if col3.button("Load Low Risk Sample", use_container_width=True):
-        st.session_state.active_sample_payload = LOW_RISK_SAMPLE.copy()
+    with col1:
+        st.markdown(
+            "<div class='smart-card'><div class='section-title' style='margin-top:0'>High Risk Demo</div>"
+            "<p>Low attendance, weak GPA, backlogs, high stress.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Load High Risk Sample", use_container_width=True):
+            st.session_state.active_sample_payload = HIGH_RISK_SAMPLE.copy()
+    with col2:
+        st.markdown(
+            "<div class='smart-card'><div class='section-title' style='margin-top:0'>Medium Risk Demo</div>"
+            "<p>Average attendance, moderate GPA, some subject weakness.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Load Medium Risk Sample", use_container_width=True):
+            st.session_state.active_sample_payload = MEDIUM_RISK_SAMPLE.copy()
+    with col3:
+        st.markdown(
+            "<div class='smart-card'><div class='section-title' style='margin-top:0'>Low Risk Demo</div>"
+            "<p>Strong attendance, high GPA, no backlogs, healthy routine.</p></div>",
+            unsafe_allow_html=True,
+        )
+        if st.button("Load Low Risk Sample", use_container_width=True):
+            st.session_state.active_sample_payload = LOW_RISK_SAMPLE.copy()
 
 
 def student_prediction_form() -> dict:
     defaults = st.session_state.get("active_sample_payload") or MEDIUM_RISK_SAMPLE
     with st.form("student_prediction_form"):
-        st.subheader("Student Identity")
+        st.markdown("<div class='smart-card'><div class='section-title' style='margin-top:0'>Student Identity</div>", unsafe_allow_html=True)
         c1, c2, c3 = st.columns(3)
         student_id = c1.text_input("Student ID", value=defaults["student_id"])
         name = c2.text_input("Name", value=defaults["name"])
@@ -31,8 +49,9 @@ def student_prediction_form() -> dict:
         year = c4.number_input("Year", 1, 4, int(defaults["year"]))
         semester = c5.number_input("Semester", 1, 8, int(defaults["semester"]))
         gender = c6.selectbox("Gender", ["Female", "Male", "Non-binary"], index=["Female", "Male", "Non-binary"].index(defaults["gender"]))
+        st.markdown("</div>", unsafe_allow_html=True)
 
-        st.subheader("Academic Performance")
+        st.markdown("<div class='smart-card'><div class='section-title' style='margin-top:0'>Academic Performance</div>", unsafe_allow_html=True)
         a1, a2, a3 = st.columns(3)
         attendance = a1.slider("Attendance %", 0, 100, int(defaults["attendance_percentage"]))
         internal_marks = a2.slider("Internal Marks Average", 0, 100, int(defaults["internal_marks_average"]))
@@ -46,16 +65,18 @@ def student_prediction_form() -> dict:
         backlogs = a8.number_input("Backlogs", 0, 20, int(defaults["backlogs"]))
         late_submissions = a9.number_input("Late Submissions", 0, 50, int(defaults["late_submissions"]))
         participation = st.slider("Participation Score", 0, 100, int(defaults["participation_score"]))
+        st.markdown("</div>", unsafe_allow_html=True)
 
-        st.subheader("Subject Scores")
+        st.markdown("<div class='smart-card'><div class='section-title' style='margin-top:0'>Subject Scores</div>", unsafe_allow_html=True)
         s1, s2, s3, s4, s5 = st.columns(5)
         math = s1.slider("Math", 0, 100, int(defaults["subject_math_score"]))
         programming = s2.slider("Programming", 0, 100, int(defaults["subject_programming_score"]))
         electronics = s3.slider("Electronics", 0, 100, int(defaults["subject_electronics_score"]))
         communication = s4.slider("Communication", 0, 100, int(defaults["subject_communication_score"]))
         lab = s5.slider("Lab", 0, 100, int(defaults["subject_lab_score"]))
+        st.markdown("</div>", unsafe_allow_html=True)
 
-        st.subheader("Engagement and Wellbeing")
+        st.markdown("<div class='smart-card'><div class='section-title' style='margin-top:0'>Engagement and Wellbeing</div>", unsafe_allow_html=True)
         e1, e2, e3, e4 = st.columns(4)
         library = e1.number_input("Library Hours", 0.0, 80.0, float(defaults["library_usage_hours"]), step=0.5)
         lms = e2.number_input("LMS Logins/Week", 0, 100, int(defaults["lms_login_frequency"]))
@@ -66,6 +87,7 @@ def student_prediction_form() -> dict:
         stress = e6.slider("Stress Level", 1, 10, int(defaults["stress_level"]))
         sleep = e7.number_input("Sleep Hours", 0.0, 12.0, float(defaults["sleep_hours"]), step=0.1)
         internet = e8.selectbox("Internet Access", ["Yes", "No"], index=0 if defaults["internet_access"] == "Yes" else 1)
+        st.markdown("</div>", unsafe_allow_html=True)
 
         submitted = st.form_submit_button("Predict Risk", use_container_width=True)
 

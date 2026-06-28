@@ -3,8 +3,13 @@ from __future__ import annotations
 import pandas as pd
 import streamlit as st
 
+from dashboard.components.cards import render_empty_state
+
 
 def students_table(students: list[dict]) -> pd.DataFrame:
+    if not students:
+        render_empty_state("No students yet", "Run a prediction or upload a batch CSV to populate this table.")
+        return pd.DataFrame()
     rows = []
     for student in students:
         record = student.get("latest_academic_record") or {}
@@ -26,6 +31,9 @@ def students_table(students: list[dict]) -> pd.DataFrame:
 
 
 def predictions_table(predictions: list[dict]) -> pd.DataFrame:
+    if not predictions:
+        render_empty_state("No predictions yet", "Prediction results will appear here after running the model.")
+        return pd.DataFrame()
     rows = [
         {
             "student_id": item.get("student_id"),
@@ -43,4 +51,7 @@ def predictions_table(predictions: list[dict]) -> pd.DataFrame:
 
 def high_risk_table(predictions: list[dict]) -> pd.DataFrame:
     high_risk = [item for item in predictions if item.get("risk_category") == "High Risk"]
+    if not high_risk:
+        render_empty_state("No high-risk students", "No high-risk records were found in this result set.")
+        return pd.DataFrame()
     return predictions_table(high_risk)
