@@ -9,9 +9,11 @@ export const WeeklyPlan = ({ plan }: { plan: Record<string, string[]> }) => (
     </CardHeader>
     <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
       {Object.entries(plan || {}).map(([day, tasks]) => (
-        <div key={day} className="rounded-xl border border-border bg-background/60 p-3">
+        <div key={day} className="rounded-3xl border border-border bg-background/60 p-4">
           <p className="font-semibold">{titleCase(day)}</p>
-          <p className="mt-2 text-sm text-muted-foreground">{tasks.join(", ")}</p>
+          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            {tasks.map((task) => <li key={task}>{task}</li>)}
+          </ul>
         </div>
       ))}
     </div>

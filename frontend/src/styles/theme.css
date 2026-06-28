@@ -1,47 +1,76 @@
 :root {
-  --background: 210 40% 98%;
-  --foreground: 222 47% 11%;
+  --background: 210 48% 97%;
+  --foreground: 222 47% 10%;
   --card: 0 0% 100%;
   --card-foreground: 222 47% 11%;
-  --muted: 210 40% 94%;
-  --muted-foreground: 215 16% 42%;
-  --border: 214 32% 86%;
-  --input: 214 32% 86%;
-  --ring: 199 89% 48%;
-  --primary: 199 89% 38%;
+  --muted: 210 36% 93%;
+  --muted-foreground: 215 17% 40%;
+  --border: 214 31% 84%;
+  --input: 214 31% 84%;
+  --ring: 194 92% 44%;
+  --primary: 194 92% 36%;
   --primary-foreground: 0 0% 100%;
+  --accent-cyan: 190 92% 42%;
+  --accent-violet: 258 84% 58%;
+  --surface: 0 0% 100%;
+  --surface-strong: 210 44% 99%;
   --success: 142 72% 29%;
-  --warning: 32 95% 37%;
-  --danger: 0 72% 42%;
+  --warning: 34 94% 40%;
+  --danger: 0 72% 43%;
 }
 
 .dark {
-  --background: 222 47% 6%;
+  --background: 224 50% 5%;
   --foreground: 210 40% 98%;
-  --card: 222 47% 10%;
+  --card: 223 43% 10%;
   --card-foreground: 210 40% 98%;
-  --muted: 217 33% 14%;
+  --muted: 221 34% 14%;
   --muted-foreground: 215 20% 70%;
-  --border: 217 33% 20%;
-  --input: 217 33% 20%;
-  --ring: 189 94% 43%;
-  --primary: 189 94% 43%;
-  --primary-foreground: 222 47% 6%;
+  --border: 221 30% 21%;
+  --input: 221 30% 21%;
+  --ring: 188 95% 46%;
+  --primary: 188 95% 46%;
+  --primary-foreground: 224 50% 5%;
+  --accent-cyan: 188 95% 46%;
+  --accent-violet: 262 92% 70%;
+  --surface: 223 43% 10%;
+  --surface-strong: 222 44% 13%;
   --success: 142 72% 48%;
   --warning: 38 92% 50%;
   --danger: 0 84% 60%;
 }
 
 .app-bg {
+  position: relative;
+  isolation: isolate;
   background:
-    radial-gradient(circle at top left, rgba(34, 211, 238, 0.14), transparent 28rem),
-    radial-gradient(circle at 85% 5%, rgba(168, 85, 247, 0.12), transparent 28rem),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.02), transparent 24rem),
+    radial-gradient(circle at 7% 0%, rgba(14, 165, 233, 0.13), transparent 31rem),
+    radial-gradient(circle at 92% 3%, rgba(124, 58, 237, 0.11), transparent 30rem),
+    radial-gradient(circle at 50% 96%, rgba(16, 185, 129, 0.07), transparent 30rem),
     hsl(var(--background));
 }
 
 .light .app-bg {
   background:
-    radial-gradient(circle at top left, rgba(14, 116, 144, 0.10), transparent 28rem),
-    radial-gradient(circle at 85% 5%, rgba(124, 58, 237, 0.08), transparent 28rem),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.015), transparent 24rem),
+    radial-gradient(circle at 7% 0%, rgba(14, 116, 144, 0.11), transparent 31rem),
+    radial-gradient(circle at 92% 3%, rgba(109, 40, 217, 0.08), transparent 30rem),
+    radial-gradient(circle at 48% 100%, rgba(16, 185, 129, 0.06), transparent 30rem),
     hsl(var(--background));
+}
+
+.dark .app-bg::before,
+.light .app-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.42;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(to bottom, black, transparent 72%);
 }

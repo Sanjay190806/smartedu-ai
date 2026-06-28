@@ -1,11 +1,20 @@
 .aurora {
   position: absolute;
   inset: -20%;
-  background: conic-gradient(from 180deg, rgba(34, 211, 238, 0.18), rgba(99, 102, 241, 0.12), rgba(16, 185, 129, 0.12), rgba(34, 211, 238, 0.18));
+  background: conic-gradient(from 180deg, rgba(34, 211, 238, 0.20), rgba(124, 58, 237, 0.14), rgba(16, 185, 129, 0.11), rgba(34, 211, 238, 0.20));
   filter: blur(70px);
-  opacity: 0.55;
+  opacity: 0.48;
   animation: aurora-shift 14s ease-in-out infinite alternate;
   pointer-events: none;
+}
+
+.mesh-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(42px);
+  opacity: 0.32;
+  animation: float-glow 10s ease-in-out infinite alternate;
 }
 
 @keyframes aurora-shift {
@@ -14,5 +23,23 @@
   }
   to {
     transform: translate3d(4%, 2%, 0) rotate(10deg);
+  }
+}
+
+@keyframes float-glow {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(18px, -12px, 0) scale(1.06);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }

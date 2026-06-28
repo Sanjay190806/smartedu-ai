@@ -21,7 +21,7 @@ export const LoginPage = () => {
   return (
     <div className="app-bg grid min-h-screen place-items-center px-4">
       <div className="absolute right-4 top-4"><ThemeToggle /></div>
-      <Card className="w-full max-w-md border-primary/20 bg-card/85 p-8">
+      <Card className="w-full max-w-md border-primary/20 bg-card/80 p-8">
         <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-primary text-primary-foreground">
           <BrainCircuit className="h-7 w-7" />
         </div>

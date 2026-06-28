@@ -9,9 +9,15 @@ export const SkillRoadmap = ({ roadmap }: { roadmap: Record<string, unknown> }) 
     </CardHeader>
     <div className="grid gap-3 md:grid-cols-2">
       {Object.entries(roadmap || {}).map(([key, value]) => (
-        <div key={key} className="rounded-xl border border-border bg-background/60 p-4">
+        <div key={key} className="rounded-3xl border border-border bg-background/60 p-4">
           <p className="font-semibold">{titleCase(key)}</p>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">{Array.isArray(value) ? value.join(", ") : String(value)}</p>
+          {Array.isArray(value) ? (
+            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              {value.map((item) => <li key={String(item)}>{String(item)}</li>)}
+            </ul>
+          ) : (
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">{String(value)}</p>
+          )}
         </div>
       ))}
     </div>

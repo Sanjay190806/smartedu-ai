@@ -7,20 +7,150 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply min-h-screen bg-background text-foreground antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.28);
+  }
+
+  select {
+    @apply outline-none transition focus:ring-2 focus:ring-ring;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply border border-white/10 shadow-glow backdrop-blur-2xl dark:bg-slate-950/55;
-    background-color: rgba(255, 255, 255, 0.08);
+    @apply relative overflow-hidden border border-white/10 shadow-glow backdrop-blur-2xl dark:bg-slate-950/60;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.045)),
+      rgba(255, 255, 255, 0.045);
+  }
+
+  .glass-card::before {
+    content: "";
+    @apply pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent;
   }
 
   .light .glass-card {
-    @apply border-slate-200/80 shadow-xl shadow-slate-200/50;
-    background-color: rgba(255, 255, 255, 0.82);
+    @apply border-slate-200/80 shadow-xl shadow-slate-200/60;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(248, 250, 252, 0.78)),
+      rgba(255, 255, 255, 0.86);
+  }
+
+  .premium-panel {
+    @apply rounded-3xl border border-border bg-card/90 p-5 text-card-foreground shadow-xl shadow-slate-950/5 backdrop-blur-xl transition duration-300 dark:bg-slate-950/60 dark:shadow-black/20;
+  }
+
+  .premium-panel:hover {
+    @apply border-primary/25 shadow-glow;
+  }
+
+  .section-eyebrow {
+    @apply text-xs font-bold uppercase text-primary;
+    letter-spacing: 0.18em;
+  }
+
+  .premium-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-border bg-card/75 px-3 py-1.5 text-xs font-semibold text-muted-foreground shadow-sm backdrop-blur;
+  }
+
+  .hero-panel {
+    @apply rounded-[2rem] border border-white/10 bg-slate-950/70 p-5 shadow-2xl shadow-cyan-950/30 backdrop-blur-2xl;
+  }
+
+  .light .hero-panel {
+    @apply border-slate-200 bg-white/80 shadow-xl shadow-slate-200/70;
+  }
+
+  .hover-lift {
+    @apply transition duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-glow;
+  }
+
+  .data-table {
+    @apply w-full border-separate border-spacing-y-2 text-left text-sm;
+  }
+
+  .data-table thead {
+    @apply text-xs uppercase text-muted-foreground;
+    letter-spacing: 0.12em;
+  }
+
+  .data-table th {
+    @apply px-3 py-2 font-semibold;
+  }
+
+  .data-table td {
+    @apply bg-card/70 px-3 py-3 first:rounded-l-2xl last:rounded-r-2xl;
+  }
+
+  .light .data-table td {
+    @apply bg-white/80;
+  }
+
+  .metric-spark {
+    @apply h-1.5 overflow-hidden rounded-full bg-muted;
+  }
+
+  .metric-spark > span {
+    @apply block h-full rounded-full bg-gradient-to-r from-primary via-accent-cyan to-accent-violet;
+  }
+
+  .step-rail {
+    @apply flex flex-wrap gap-2 rounded-2xl border border-border bg-background/60 p-2;
+  }
+
+  .step-chip {
+    @apply rounded-full px-3 py-1.5 text-xs font-semibold text-muted-foreground;
+  }
+
+  .step-chip-active {
+    @apply bg-primary text-primary-foreground shadow-lg shadow-cyan-500/20;
+  }
+
+  .report-section {
+    @apply rounded-3xl border border-border bg-card/80 p-5 shadow-xl shadow-slate-950/5 backdrop-blur-xl;
+  }
+
+  .kbd-card {
+    @apply rounded-2xl border border-border bg-background/60 p-4 font-mono text-xs text-muted-foreground;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: #0f172a !important;
+  }
+
+  .app-bg,
+  .glass-card,
+  .premium-panel,
+  .report-section {
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  button,
+  aside,
+  header,
+  details {
+    display: none !important;
   }
 }
